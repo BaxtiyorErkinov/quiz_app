@@ -27,9 +27,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
   }
   body {
-    // color: ${({ theme }) => theme.colors.white.main};
-    // background-color: ${({ theme }) => theme.colors.blue[500]};
+
   }
 `;
 
 export default GlobalStyles;
+    // color: ${({ theme }) => theme.colors.white.main};
+    // background-color: ${({ theme }) => theme.colors.blue[500]};
