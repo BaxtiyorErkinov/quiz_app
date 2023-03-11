@@ -1,8 +1,7 @@
+import { Theme } from '@/theme/default';
+import { createGlobalStyle } from 'styled-components';
 
-
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
   *::before,
   *,
   *::after {
@@ -27,10 +26,9 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
   }
   body {
-
+    color: ${({ theme }) => theme.colors.white.main};
+    background-color: ${({ theme }) => theme.colors.dark['500']};
   }
 `;
 
 export default GlobalStyles;
-    // color: ${({ theme }) => theme.colors.white.main};
-    // background-color: ${({ theme }) => theme.colors.blue[500]};
