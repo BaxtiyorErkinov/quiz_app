@@ -62,14 +62,13 @@ const Register: React.FC = () => {
       ) as IUser[];
 
       localStorage.setItem('user', JSON.stringify(params));
+      navigate('/');
       if (usersDB.length) {
-        const res = [...usersDB, params];
         localStorage.setItem('usersDB', JSON.stringify([...usersDB, params]));
         return;
       }
 
       localStorage.setItem('usersDB', JSON.stringify([params]));
-      navigate('/');
     }
   };
 

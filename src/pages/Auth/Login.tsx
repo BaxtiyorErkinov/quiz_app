@@ -6,7 +6,7 @@ import { FiLock } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
 import Button from '@/components/Button';
 import Validator from '@/utils/ValidationForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IUser } from '@/models/IUser';
 
 const initialState = {
@@ -31,6 +31,7 @@ const Login: React.FC = () => {
   const [params, setParams] = React.useState(initialState);
   const [validations, setValidations] = React.useState(initialState);
   const [valid, errors] = validator.checkAgainstSchema(params);
+  const navigate = useNavigate();
 
   const handleChange = (key: keyof typeof initialState, value: string) => {
     const [, error] = validator.check(key, value);
@@ -57,6 +58,7 @@ const Login: React.FC = () => {
         if (res > -1) {
           localStorage.setItem('user', JSON.stringify(usersDB[res]));
           alert('Success');
+          navigate('/');
           return;
         }
         alert('please sign up!!!');
