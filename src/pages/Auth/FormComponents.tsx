@@ -24,7 +24,7 @@ export const Form = styled.form`
   }
 
   a {
-    color: #2dc653;
+    color: ${({ theme }) => theme.colors.green};
   }
 `;
 

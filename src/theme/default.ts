@@ -11,6 +11,7 @@ export const theme = {
       400: '#343a40',
       500: '#212529',
     },
+    green: '#03ca82',
   },
   font: {
     size: {
@@ -27,6 +28,6 @@ export const theme = {
       bold: 700,
     },
   },
-};
+} as const;
 
 export type Theme = typeof theme;

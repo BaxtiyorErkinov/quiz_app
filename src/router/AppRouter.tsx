@@ -5,6 +5,7 @@ import App from '@/layout/App';
 import Home from '@/pages/Home';
 import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
+import Favorites from '@/pages/Favorites';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/asd',
-        element: <Home />,
+        path: '/favorite',
+        element: <Favorites />,
       },
     ],
   },

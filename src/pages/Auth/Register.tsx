@@ -3,74 +3,19 @@ import React, { ChangeEvent } from 'react';
 import TextField from '@/components/TextField';
 import { Form, FormContainer } from './FormComponents';
 import Button from '@/components/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { FiLock } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
-
-import Validator from '@/utils/ValidationForm';
-import { IUser } from '@/models/IUser';
-
-const initialState = {
-  username: '',
-  email: '',
-  password: '',
-};
-
-const validator = new Validator({
-  email: {
-    type: 'string',
-    maxLength: 60,
-    minLength: 5,
-  },
-  username: {
-    type: 'string',
-    maxLength: 60,
-    minLength: 5,
-  },
-  password: {
-    type: 'string',
-    maxLength: 60,
-    minLength: 5,
-  },
-});
+import { useRegister } from './hooks/useRegister';
+import { useTheme } from 'styled-components';
+import { Theme } from '@/theme/default';
 
 const Register: React.FC = () => {
-  const [params, setParams] = React.useState(initialState);
-  const [validations, setValidations] = React.useState(initialState);
-  const [valid, errors] = validator.checkAgainstSchema(params);
-  const navigate = useNavigate();
-
-  const handleChange = (key: keyof typeof initialState, value: string) => {
-    const [, error] = validator.check(key, value);
-    console.log(error);
-
-    setValidations((state) => ({ ...state, [key]: error }));
-
-    setParams((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    if (valid) {
-      const usersDB = JSON.parse(
-        localStorage.getItem('usersDB') || '[]',
-      ) as IUser[];
-
-      localStorage.setItem('user', JSON.stringify(params));
-      navigate('/');
-      if (usersDB.length) {
-        localStorage.setItem('usersDB', JSON.stringify([...usersDB, params]));
-        return;
-      }
-
-      localStorage.setItem('usersDB', JSON.stringify([params]));
-    }
-  };
+  const { handleChange, handleSubmit, params, valid, validations } =
+    useRegister();
+  const { colors } = useTheme();
 
   return (
     <FormContainer>
@@ -78,14 +23,14 @@ const Register: React.FC = () => {
         <h1>Sign Up</h1>
         <TextField
           type="text"
-          value={params.username}
+          value={params.fullName}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleChange('username', e.target.value)
+            handleChange('fullName', e.target.value)
           }
           placeholder="Username"
           icon={<AiOutlineUser />}
-          error={!!validations.username}
-          helperText={validations.username}
+          error={!!validations.fullName}
+          helperText={validations.fullName}
         />
         <TextField
           type="email"
@@ -110,7 +55,7 @@ const Register: React.FC = () => {
           helperText={validations.password}
         />
         <Button
-          bgColor="#2dc653"
+          bgColor={colors.green}
           disabled={!valid}
           onClick={() => console.log('1')}>
           SUBMIT

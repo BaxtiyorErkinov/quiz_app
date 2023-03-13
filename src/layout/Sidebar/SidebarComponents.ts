@@ -15,6 +15,7 @@ export const SidebarContainer = styled.aside`
   padding: 20px 0;
   position: relative;
   overflow: hidden;
+  z-index: 100;
 `;
 
 export const SidebarRoutes = styled.ul`
@@ -46,7 +47,7 @@ export const SidebarRoutesItem = styled.li<SidebarProps>`
   }
 
   a.active {
-    background-color: #2dc653;
+    background-color: ${({ theme }) => theme.colors.green};
   }
 
   @media screen and (max-width: 768px) {
@@ -56,38 +57,3 @@ export const SidebarRoutesItem = styled.li<SidebarProps>`
 `;
 
 export const LogoutSection = styled.div``;
-
-export const SidebarToggle = styled.button`
-  position: absolute;
-  top: 20%;
-  right: -40px;
-  width: 40px;
-  height: 60px;
-  background: ${({ theme }) => theme.colors.dark[400]};
-  border: 2px solid #2dc653;
-  border-left: none;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  color: #2dc653;
-  transition: all 0.3s;
-  z-index: 10;
-
-  svg {
-    pointer-events: none;
-  }
-
-  :active {
-    background: #2dc653;
-    color: ${({ theme }) => theme.colors.white.main};
-    border: 2px solid ${({ theme }) => theme.colors.white.main};
-    border-left: none;
-  }
-
-  @media screen and (max-width: 768px) {
-    display: flex;
-  }
-`;

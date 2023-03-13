@@ -1,22 +1,41 @@
-import { IUser } from '@/models/IUser';
+import { IUserResponse } from '@/models/IUser';
 import {
   HeaderContainer,
   HeaderLogo,
+  HeaderToggle,
   HeaderUserSection,
+  Toggle,
   UserAvatar,
   UserName,
 } from './HeaderComponents';
 
-const Header = () => {
-  const user = JSON.parse(localStorage.getItem('user') || '{}') as IUser;
+import { AiOutlineMenu } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
+
+interface IHeaderProps {
+  isOpen: boolean;
+  setIsOpen: (arg: boolean) => void;
+}
+
+const Header: React.FC<IHeaderProps> = ({ isOpen, setIsOpen }) => {
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}',
+  ) as IUserResponse;
+
+  console.log(isOpen, setIsOpen);
 
   return (
     <HeaderContainer>
-      <HeaderLogo>QUIZ APP</HeaderLogo>
+      <HeaderToggle>
+        <Toggle onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <GrClose /> : <AiOutlineMenu />}
+        </Toggle>
+        <HeaderLogo>QUIZ APP</HeaderLogo>
+      </HeaderToggle>
       {Object.entries(user).length && (
         <HeaderUserSection>
-          <UserName>{user.username}</UserName>
-          <UserAvatar>{user.username.slice(0, 1)}</UserAvatar>
+          <UserName>{user.FullName}</UserName>
+          <UserAvatar>{user.FullName.slice(0, 1)}</UserAvatar>
         </HeaderUserSection>
       )}
     </HeaderContainer>

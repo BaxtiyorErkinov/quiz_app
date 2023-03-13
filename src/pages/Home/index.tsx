@@ -1,9 +1,18 @@
-
+import Quizzes from '@/components/Quizzes';
+import mainApi from '@/lib/axios/mainApi';
+import { getUser } from '@/utils/getUser';
+import React from 'react';
+import { useTheme } from 'styled-components';
+import { useQuizzes } from './hooks/useQuizzes';
 
 const Home = () => {
-	return (
-		<div>Home</div>
-	)
-}
+  const [quizzes, loading] = useQuizzes();
 
-export default Home
+  return (
+    <div>
+      <Quizzes quizzes={quizzes} loading={loading} />
+    </div>
+  );
+};
+
+export default Home;

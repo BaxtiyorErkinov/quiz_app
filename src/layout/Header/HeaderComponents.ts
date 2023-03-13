@@ -29,7 +29,7 @@ export const UserAvatar = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #2dc653;
+  background-color: ${({ theme }) => theme.colors.green};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,4 +38,26 @@ export const UserAvatar = styled.div`
 export const UserName = styled.span`
   font-size: ${({ theme }) => theme.font.size.bs};
   font-weight: ${({ theme }) => theme.font.weight.bold};
+`;
+
+export const HeaderToggle = styled.div`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+`;
+
+export const Toggle = styled.div`
+  font-size: 25px;
+  color: ${({ theme }) => theme.colors.white.main};
+  display: none;
+
+  svg {
+    path {
+      fill: ${({ theme }) => theme.colors.white.main};
+      stroke: ${({ theme }) => theme.colors.white.main};
+    }
+  }
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
 `;

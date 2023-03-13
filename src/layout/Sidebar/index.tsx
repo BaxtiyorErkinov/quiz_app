@@ -1,5 +1,9 @@
+import axios from '@/lib/axios/auth';
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+
+import { getUser } from '@/utils/getUser';
 
 import Button from '@/components/Button';
 import {
@@ -7,14 +11,9 @@ import {
   SidebarContainer,
   SidebarRoutes,
   SidebarRoutesItem,
-  SidebarToggle,
 } from './SidebarComponents';
 
 import { BiLogOutCircle } from 'react-icons/bi';
-import {
-  TbSquareRoundedArrowLeft,
-  TbSquareRoundedArrowRight,
-} from 'react-icons/tb';
 
 const routes = [
   {
@@ -22,8 +21,8 @@ const routes = [
     url: '/',
   },
   {
-    title: 'Leaderboard',
-    url: '/asd',
+    title: 'Favorites',
+    url: '/favorite',
   },
 ];
 
@@ -34,17 +33,23 @@ interface ISiderbarProps {
 
 const Sidebar: React.FC<ISiderbarProps> = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
+  const { RefreshToken: Token } = getUser();
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/signin');
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post(`/api/Auth/logout?refreshToken=${Token}`);
+      if (res.status === 204) {
+        localStorage.removeItem('user');
+        navigate('/signin');
+      }
+    } catch (err) {
+      const errorMess = err as AxiosError;
+      alert(errorMess.response?.data);
+    }
   };
 
   return (
     <>
-      <SidebarToggle onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <TbSquareRoundedArrowLeft /> : <TbSquareRoundedArrowRight />}
-      </SidebarToggle>
       <SidebarContainer>
         <SidebarRoutes>
           {routes.map((route) => (

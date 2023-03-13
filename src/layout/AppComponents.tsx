@@ -12,9 +12,15 @@ export const SidebarSection = styled.nav<SidebarProps>`
   position: relative;
   transition: all 0.4s;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 640px) and (max-width: 768px) {
     position: absolute;
     width: ${({ isOpen }) => (isOpen ? '40%' : '0%')};
+    transition: all 0.3s;
+  }
+
+  @media screen and (max-width: 640px) {
+    position: absolute;
+    width: ${({ isOpen }) => (isOpen ? '50%' : '0%')};
     transition: all 0.3s;
   }
 `;
@@ -22,4 +28,5 @@ export const SidebarSection = styled.nav<SidebarProps>`
 export const MainContent = styled.article`
   background: ${({ theme }) => theme.colors.dark[500]};
   width: 100%;
+  padding: 10px;
 `;
