@@ -22,8 +22,6 @@ const Header: React.FC<IHeaderProps> = ({ isOpen, setIsOpen }) => {
     localStorage.getItem('user') || '{}',
   ) as IUserResponse;
 
-  console.log(isOpen, setIsOpen);
-
   return (
     <HeaderContainer>
       <HeaderToggle>

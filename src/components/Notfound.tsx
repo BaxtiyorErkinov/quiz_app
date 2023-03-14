@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 type NotFoundProps = {
   message: string;
+  error?: boolean;
 };
 
 const NotFoundContainer = styled.div`
@@ -18,15 +19,15 @@ const NotFoundContainer = styled.div`
 
 const Img = styled.img``;
 
-const HeadMess = styled.h1`
-  color: ${({ theme }) => theme.colors.green};
+const HeadMess = styled.h1<{ error: boolean }>`
+  color: ${({ theme, error }) => (error ? 'red' : theme.colors.green)};
 `;
 
-const Notfound: React.FC<NotFoundProps> = ({ message }) => {
+const Notfound: React.FC<NotFoundProps> = ({ message, error = false }) => {
   return (
     <NotFoundContainer>
       <Img src={NotFoundImg} alt="notfound" />
-      <HeadMess>{message}</HeadMess>
+      <HeadMess error={error}>{message}</HeadMess>
     </NotFoundContainer>
   );
 };

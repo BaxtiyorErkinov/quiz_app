@@ -14,6 +14,7 @@ import { IQuizzes } from '@/models/IQuiz';
 import { getFavoriteQuizzes } from '@/utils/getFavoriteQuizzes';
 import Notfound from '../Notfound';
 import Loader from '../Loader';
+import { useNavigate } from 'react-router-dom';
 
 type IQuizzesProps = {
   quizzes: IQuizzes[];
@@ -23,6 +24,7 @@ type IQuizzesProps = {
 const Quizzes: React.FC<IQuizzesProps> = ({ quizzes, loading = false }) => {
   const favQuizzes = getFavoriteQuizzes();
   const [counter, setCounter] = React.useState(1);
+  const navigate = useNavigate();
 
   const handleAddToFavorites = (quiz: IQuizzes) => {
     setCounter((pre) => pre + 1);
@@ -47,6 +49,10 @@ const Quizzes: React.FC<IQuizzesProps> = ({ quizzes, loading = false }) => {
     return '';
   };
 
+  const handleNavigate = (quizID: number) => {
+    navigate(`quiz/${quizID}`);
+  };
+
   if (loading) {
     return (
       <QuizzesList>
@@ -60,7 +66,12 @@ const Quizzes: React.FC<IQuizzesProps> = ({ quizzes, loading = false }) => {
       <QuizzesList>
         {quizzes.length > 0 ? (
           quizzes.map((quiz) => (
-            <QuizzesListItem key={quiz.id}>
+            <QuizzesListItem
+              key={quiz.id}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigate(quiz.id);
+              }}>
               <QuizzesListItemLine />
               <QuizzesListItemContent>
                 <QuizzesListItemTitle>{quiz.title}</QuizzesListItemTitle>
@@ -70,9 +81,10 @@ const Quizzes: React.FC<IQuizzesProps> = ({ quizzes, loading = false }) => {
                 <QuizzesListItemFavorite>
                   <BsFillBookmarkFill
                     className={isFavoriteQuiz(quiz)}
-                    onClick={(e: React.SyntheticEvent) =>
-                      handleAddToFavorites(quiz)
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToFavorites(quiz);
+                    }}
                   />
                 </QuizzesListItemFavorite>
               </QuizzesListItemContent>

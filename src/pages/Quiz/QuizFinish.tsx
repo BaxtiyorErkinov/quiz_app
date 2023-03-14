@@ -1,0 +1,101 @@
+import Button from '@/components/Button';
+import { getCorrectAnswers } from '@/utils/getCorrectAnswers';
+import { useAppSelector } from '@/utils/hooks/redux';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import {
+  Content,
+  Line,
+  QuizContainer,
+  ResultInfo,
+  ResultItem,
+  ResultScore,
+  UserAvatar,
+  UserEmail,
+  UserInfo,
+  UserName,
+  UserResults,
+  UserSection,
+} from './QuizComponents';
+
+type Props = {};
+
+const QuizFinish = (props: Props) => {
+  const navigate = useNavigate();
+  const { colors } = useTheme();
+  const [isSaved, setIsSaved] = React.useState(false);
+  const { quiz, answers } = useAppSelector((state) => state.quiz);
+  const totalQuiz = quiz.Questions.length;
+  const correctAnswers = getCorrectAnswers(answers, quiz);
+
+  const handleSave = () => {
+    const savedResults = JSON.parse(
+      localStorage.getItem('savedResults') || '[]',
+    );
+    setIsSaved(true);
+    localStorage.setItem(
+      'savedResults',
+      JSON.stringify([
+        ...savedResults,
+        {
+          total: totalQuiz,
+          correctAnswers,
+          points: correctAnswers * 2,
+        },
+      ]),
+    );
+  };
+
+  const alertUser = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = 'Test';
+  };
+
+  React.useEffect(() => {
+    if (!quiz.Questions.length) {
+      navigate('/');
+    }
+
+    window.addEventListener('beforeunload', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+    };
+  }, []);
+
+  return (
+    <QuizContainer>
+      <Content>
+        <UserSection>
+          <UserInfo>
+            <UserName>Baxtiyor Erkinov</UserName>
+            <UserEmail>erkinov@gmail.com</UserEmail>
+          </UserInfo>
+          <UserAvatar>B</UserAvatar>
+        </UserSection>
+        <UserResults>
+          <ResultItem>
+            <ResultScore>{totalQuiz}</ResultScore>
+            <ResultInfo>total</ResultInfo>
+          </ResultItem>
+          <Line />
+          <ResultItem>
+            <ResultScore>{correctAnswers}</ResultScore>
+            <ResultInfo>correct</ResultInfo>
+          </ResultItem>
+          <Line />
+          <ResultItem>
+            <ResultScore>{correctAnswers * 2}</ResultScore>
+            <ResultInfo>points</ResultInfo>
+          </ResultItem>
+          <Line />
+        </UserResults>
+        <Button bgColor={colors.green} onClick={handleSave} disabled={isSaved}>
+          {isSaved ? 'SAVED' : 'SAVE'}
+        </Button>
+      </Content>
+    </QuizContainer>
+  );
+};
+
+export default QuizFinish;
