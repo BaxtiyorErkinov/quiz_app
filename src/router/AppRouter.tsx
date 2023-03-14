@@ -9,6 +9,8 @@ import Favorites from '@/pages/Favorites';
 import Quiz from '@/pages/Quiz';
 import QuizStep from '@/pages/Quiz/QuizStep';
 import QuizFinish from '@/pages/Quiz/QuizFinish';
+import History from '@/pages/History';
+import Leaderboard from '@/pages/Leaderboard';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: '/favorite',
         element: <Favorites />,
+      },
+      {
+        path: '/history',
+        element: <History />,
+      },
+      {
+        path: 'leaderboard',
+        element: <Leaderboard />,
       },
     ],
   },

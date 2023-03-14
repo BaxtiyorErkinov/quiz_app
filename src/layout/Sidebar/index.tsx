@@ -14,17 +14,7 @@ import {
 } from './SidebarComponents';
 
 import { BiLogOutCircle } from 'react-icons/bi';
-
-const routes = [
-  {
-    title: 'Home',
-    url: '/',
-  },
-  {
-    title: 'Favorites',
-    url: '/favorite',
-  },
-];
+import { routes } from '@/router/routes';
 
 interface ISiderbarProps {
   isOpen: boolean;

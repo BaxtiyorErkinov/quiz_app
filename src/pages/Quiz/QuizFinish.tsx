@@ -25,8 +25,10 @@ const QuizFinish = (props: Props) => {
   const navigate = useNavigate();
   const { colors } = useTheme();
   const [isSaved, setIsSaved] = React.useState(false);
-  const { quiz, answers } = useAppSelector((state) => state.quiz);
-  const totalQuiz = quiz.Questions.length;
+  const { quiz, answers, currentQuestion } = useAppSelector(
+    (state) => state.quiz,
+  );
+  const totalQuiz = quiz?.Questions?.length;
   const correctAnswers = getCorrectAnswers(answers, quiz);
 
   const handleSave = () => {
@@ -39,9 +41,11 @@ const QuizFinish = (props: Props) => {
       JSON.stringify([
         ...savedResults,
         {
+          id: Math.floor(Math.random() * 1000000),
           total: totalQuiz,
           correctAnswers,
           points: correctAnswers * 2,
+          date: new Date(),
         },
       ]),
     );
@@ -49,11 +53,11 @@ const QuizFinish = (props: Props) => {
 
   const alertUser = (e: BeforeUnloadEvent) => {
     e.preventDefault();
-    e.returnValue = 'Test';
+    e.returnValue = 'Test1';
   };
 
   React.useEffect(() => {
-    if (!quiz.Questions.length) {
+    if (!Object.entries(currentQuestion).length) {
       navigate('/');
     }
 
