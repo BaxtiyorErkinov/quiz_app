@@ -10,4 +10,5 @@ export interface IUserResponse {
   FullName: string;
   RefreshToken: string;
   Token: string;
+  UserId: string;
 }

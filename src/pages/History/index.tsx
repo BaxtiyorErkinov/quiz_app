@@ -53,7 +53,7 @@ const History = () => {
             <UserSection>
               <UserInfo>
                 <UserName>{FullName}</UserName>
-                <UserEmail>unknown@gmail.com</UserEmail>
+                <UserEmail>{Email}</UserEmail>
               </UserInfo>
               <UserAvatar>{FullName.slice(0, 1)}</UserAvatar>
             </UserSection>

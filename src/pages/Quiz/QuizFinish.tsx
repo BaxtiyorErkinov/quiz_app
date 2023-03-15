@@ -5,6 +5,7 @@ import { useAppSelector } from '@/utils/hooks/redux';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
+import { useFinishedQuiz } from './hooks/useFinishedQuiz';
 import {
   Content,
   Line,
@@ -23,6 +24,7 @@ import {
 type Props = {};
 
 const QuizFinish = (props: Props) => {
+  const { loading, result } = useFinishedQuiz();
   const user = getUser();
   const navigate = useNavigate();
   const { colors } = useTheme();
@@ -93,7 +95,7 @@ const QuizFinish = (props: Props) => {
           </ResultItem>
           <Line />
           <ResultItem>
-            <ResultScore>{correctAnswers * 2}</ResultScore>
+            <ResultScore>{result.score}</ResultScore>
             <ResultInfo>points</ResultInfo>
           </ResultItem>
           <Line />
