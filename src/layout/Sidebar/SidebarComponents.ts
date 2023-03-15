@@ -52,6 +52,10 @@ export const SidebarRoutesItem = styled.li<SidebarProps>`
     background-color: ${({ theme }) => theme.colors.green};
   }
 
+  svg {
+    min-height: 30px;
+  }
+
   @media screen and (max-width: 768px) {
     position: ${({ isOpen }) => (isOpen ? 'sticky' : 'absolute')};
     display: ${({ isOpen }) => (isOpen ? '' : 'none')};

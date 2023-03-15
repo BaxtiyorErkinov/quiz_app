@@ -19,14 +19,16 @@ const Leaderboard = () => {
     <Container>
       <Header>
         <HeaderTitle>Leaderboard</HeaderTitle>
-        <Select
-          options={quizOptions as IQuizOptions[]}
-          value={'id'}
-          renderText={'title'}
-          onChange={(e) => {
-            setSelectedOption(e);
-          }}
-        />
+        {quizOptions?.length && (
+          <Select
+            options={quizOptions as IQuizOptions[]}
+            value={'id'}
+            renderText={'title'}
+            onChange={(e) => {
+              setSelectedOption(e);
+            }}
+          />
+        )}
       </Header>
       <Content>
         {loading ? (

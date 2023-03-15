@@ -26,6 +26,10 @@ export const Form = styled.form`
   a {
     color: ${({ theme }) => theme.colors.green};
   }
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+  }
 `;
 
 export const SignUp = styled;

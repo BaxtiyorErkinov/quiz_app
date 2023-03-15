@@ -1,6 +1,7 @@
 export default class Validator<
   T extends { [key: string]: string | number | object },
 > {
+  schema: any;
   constructor(schema: T) {
     if (typeof schema !== 'object') {
       return;
@@ -26,8 +27,8 @@ export default class Validator<
 
     return [true, null];
   }
-  checkAgainstSchema(form) {
-    const validationResults = {};
+  checkAgainstSchema(form: any) {
+    const validationResults: any = {};
     let isValid = true;
 
     for (const name in this.schema) {
