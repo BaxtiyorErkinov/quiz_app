@@ -15,6 +15,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+  }
 `;
 
 export const Title = styled.h1``;

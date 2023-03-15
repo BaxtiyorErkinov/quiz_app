@@ -31,17 +31,19 @@ export const SidebarRoutesItem = styled.li<SidebarProps>`
   width: 100%;
   list-style: none;
   height: 30px;
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   flex-direction: column;
+  text-align: left;
   a {
     color: ${({ theme }) => theme.colors.white.main};
     text-decoration: none;
     height: 100%;
     display: flex;
-    justify-content: center;
+    column-gap: 10px;
     align-items: center;
     border-radius: 30px;
+    padding: 0 10px;
     font-size: ${({ theme }) => theme.font.size.md};
     font-weight: ${({ theme }) => theme.font.weight.bold};
   }

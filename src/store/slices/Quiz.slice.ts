@@ -40,9 +40,6 @@ export const quizSlice = createSlice({
         state.currentQuestionIdx = (state.currentQuestionIdx as number) + 1;
         state.currentQuestion = quiz.Questions[state.currentQuestionIdx];
       }
-      //   state.currentQuestionIdx = (state.currentQuestionIdx as number) + 1;
-
-      console.log(state.currentQuestionIdx);
     },
     setAnswers: (state, { payload }: PayloadAction<IAnswer>) => {
       state.answers.push(payload);

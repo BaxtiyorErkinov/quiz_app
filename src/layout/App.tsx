@@ -22,6 +22,20 @@ function App() {
     navigate('/signin');
   }, []);
 
+  const resizeEvent = (e: Event) => {
+    const target = e.target as Window;
+    if (target.innerWidth <= 640) {
+      setSidebarActive(false);
+      return;
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('resize', resizeEvent);
+
+    return () => window.removeEventListener('resize', resizeEvent);
+  }, []);
+
   return (
     <>
       <Header isOpen={sidebarActive} setIsOpen={setSidebarActive} />

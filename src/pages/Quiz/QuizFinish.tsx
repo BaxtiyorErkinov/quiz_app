@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import { getCorrectAnswers } from '@/utils/getCorrectAnswers';
+import { getUser } from '@/utils/getUser';
 import { useAppSelector } from '@/utils/hooks/redux';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +23,7 @@ import {
 type Props = {};
 
 const QuizFinish = (props: Props) => {
+  const user = getUser();
   const navigate = useNavigate();
   const { colors } = useTheme();
   const [isSaved, setIsSaved] = React.useState(false);
@@ -72,10 +74,12 @@ const QuizFinish = (props: Props) => {
       <Content>
         <UserSection>
           <UserInfo>
-            <UserName>Baxtiyor Erkinov</UserName>
-            <UserEmail>erkinov@gmail.com</UserEmail>
+            <UserName>{user.FullName}</UserName>
+            <UserEmail>
+              {user.Email ? user.Email : 'unknown@gmail.com'}
+            </UserEmail>
           </UserInfo>
-          <UserAvatar>B</UserAvatar>
+          <UserAvatar>{user.FullName.slice(0, 1)}</UserAvatar>
         </UserSection>
         <UserResults>
           <ResultItem>

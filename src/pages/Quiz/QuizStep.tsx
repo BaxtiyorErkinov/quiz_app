@@ -31,6 +31,7 @@ const QuizStep = (props: Props) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setAnswer(selectedOption as string);
+    setSelectedOption(null);
   };
 
   const alertUser = (e: BeforeUnloadEvent) => {

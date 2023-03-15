@@ -48,6 +48,7 @@ const Sidebar: React.FC<ISiderbarProps> = ({ isOpen, setIsOpen }) => {
                 <NavLink
                   to={route.url}
                   className={({ isActive }) => (isActive ? 'active' : '')}>
+                  {route.icon}
                   {route.title}
                 </NavLink>
               </SidebarRoutesItem>

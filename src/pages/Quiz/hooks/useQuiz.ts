@@ -30,8 +30,6 @@ export const useQuiz = (): useQuizParams => {
     const currentQuestionID = currentQuestion.Id;
     const lastQuestionID = quiz.Questions[quiz.Questions.length - 1].Id;
 
-    console.log('@@@@', currentQuestionID, lastQuestionID);
-
     if (currentQuestionID !== lastQuestionID) {
       dispatch(
         setAnswers({

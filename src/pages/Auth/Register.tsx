@@ -54,10 +54,7 @@ const Register: React.FC = () => {
           error={!!validations.password}
           helperText={validations.password}
         />
-        <Button
-          bgColor={colors.green}
-          disabled={!valid}
-          onClick={() => console.log('1')}>
+        <Button bgColor={colors.green} disabled={!valid}>
           SUBMIT
         </Button>
         <Link to="/signin">Sign In</Link>

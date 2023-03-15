@@ -4,6 +4,7 @@ export const HistoryContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 export const HistoryItem = styled.div`
@@ -13,6 +14,7 @@ export const HistoryItem = styled.div`
   flex-direction: column;
   row-gap: 10px;
   padding: 10px 10px 5px 10px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.dark[500]};
 `;
 
 export const UserSection = styled.div`

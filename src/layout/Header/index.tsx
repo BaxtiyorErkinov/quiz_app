@@ -11,6 +11,7 @@ import {
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 
 interface IHeaderProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface IHeaderProps {
 }
 
 const Header: React.FC<IHeaderProps> = ({ isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
   const user = JSON.parse(
     localStorage.getItem('user') || '{}',
   ) as IUserResponse;
@@ -28,7 +30,7 @@ const Header: React.FC<IHeaderProps> = ({ isOpen, setIsOpen }) => {
         <Toggle onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <GrClose /> : <AiOutlineMenu />}
         </Toggle>
-        <HeaderLogo>QUIZ APP</HeaderLogo>
+        <HeaderLogo onClick={() => navigate('/')}>QUIZ APP</HeaderLogo>
       </HeaderToggle>
       {Object.entries(user).length && (
         <HeaderUserSection>

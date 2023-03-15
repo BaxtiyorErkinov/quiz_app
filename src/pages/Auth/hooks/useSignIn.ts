@@ -41,7 +41,6 @@ export const useSignIn = (): IUseSignInFn => {
 
   const handleChange = (key: keyof typeof initialState, value: string) => {
     const [, error] = validator.check(key, value);
-    console.log(error);
 
     setValidations((state) => ({ ...state, [key]: error }));
 
